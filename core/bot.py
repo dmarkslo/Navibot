@@ -1,10 +1,8 @@
 from __future__ import annotations
-from typing import Optional
 from discord.ext import commands
-from .command import *
-from .commandHandler import CommandHandler
+from .commands import *
+from .CommandHandler import CommandHandler
 import discord
-from logging import getLogger; log = getLogger("Bot")
 
 __all__ = (
     "Bot",

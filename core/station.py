@@ -1,6 +1,5 @@
-from .entity import Entity
-from .jsonreader import JSONReader
-import discord
+from .Entity import Entity
+from .JSONReader import JSONReader
 
 class Station(Entity):
     items = [

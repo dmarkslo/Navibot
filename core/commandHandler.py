@@ -1,4 +1,4 @@
-from .command import Command
+from .commands import Command
 
 class CommandHandler:
     def __init__(self):

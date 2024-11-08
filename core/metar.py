@@ -1,5 +1,5 @@
-from .entity import Entity
-from .jsonreader import JSONReader
+from .Entity import Entity
+from .JSONReader import JSONReader
 
 class Metar(Entity):
     items = [
