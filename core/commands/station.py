@@ -1,5 +1,5 @@
-from .Entity import Entity
-from .JSONReader import JSONReader
+from ..jsonreader import JSONReader
+from ..entity import Entity
 
 class Station(Entity):
     items = [

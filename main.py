@@ -1,5 +1,5 @@
 import discord
-from core import Bot
+from core.bot import *
 from config import TOKEN
 import asyncio
 

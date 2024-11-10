@@ -1,7 +1,10 @@
 from __future__ import annotations
 from discord.ext import commands
-from .commands import *
-from .CommandHandler import CommandHandler
+from .commandHandler import *
+from .commands.command import Command
+from .commands.utility.cmds_command import CmdsCommand
+from .commands.utility.info_command import InfoCommand
+from .commands.weather.metar_command import MetarCommand
 import discord
 
 __all__ = (
@@ -12,7 +15,8 @@ class Bot(commands.AutoShardedBot):
 
     handler = CommandHandler()
     handler.register_command(MetarCommand())
-    handler.register_command(CmdsCommand())
+    handler.register_command(InfoCommand())
+    handler.register_command(CmdsCommand(handler.commands))
 
     def __init__(self):
         super().__init__(
@@ -23,6 +27,7 @@ class Bot(commands.AutoShardedBot):
 
     async def on_ready(self) -> None:
         print(f'logged in as {self.user}')
+
 
     async def on_message(self, message):
         if message.author == self.user:
