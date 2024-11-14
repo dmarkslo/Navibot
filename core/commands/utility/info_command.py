@@ -13,25 +13,21 @@ class InfoCommand(Command):
      
     def __init__(self):
         super().__init__(name="info", description="Displays basic airfield data.")
-        self.syntax = "$info ICAO"
+        self.syntax = f"${self.name} ICAO"
 
     async def execute(self,ctx,*args):
         station_data = self.fetch_data_from_api("station",args[0]) 
         if station_data:
-            station = Station(station_data)    
-            await ctx.reply(embed=self.build_embed(station))
+            station_object = Station(station_data)    
+            await ctx.reply(embed=self.build_embed(station_object))
         else:
             await ctx.reply("Requested airport not found. Make sure the ICAO is valid.")
 
-    def fetch_data_from_api(self, type, icao, nearest=False):
-        #flag decides to fetch requested station or nearest station.
-        if nearest:
-            url = f"https://api.checkwx.com/{type}/{icao}/nearest/?x-api-key=" + APIKEY
-        else:
-            url = f"https://api.checkwx.com/{type}/{icao}?x-api-key=" + APIKEY
+    def fetch_data_from_api(self, type, icao):
+        URL = f"https://api.checkwx.com/{type}/{icao}?x-api-key=" + APIKEY
         
-        response = requests.get(url)
-        if response.status_code == 200:
+        response = requests.get(URL)
+        if response.status_code == 200: #200 = OK
             data = response.json()
             if data.get('results') == 1:
                 return data
@@ -51,7 +47,6 @@ class InfoCommand(Command):
             colour=0x00b0f4,
             timestamp=datetime.now()
         )
-        embed.set_author(name="NaviBot")
         
         embed.add_field(name="ICAO", value=station.icao or "N/A", inline=True)
         embed.add_field(name="IATA", value=station.iata or "N/A", inline=True)

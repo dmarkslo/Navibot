@@ -15,7 +15,6 @@ class CmdsCommand(Command):
             title=f"Commands",
             colour=0x00b0f4
         )
-        embed.set_author(name="NaviBot")
         
         for command in self.commands.values():
             embed.add_field(name=f"{command.syntax if hasattr(command,'syntax') else '$' + command.name}", value=f"``{command.description}``" or "``N/A``", inline=False)

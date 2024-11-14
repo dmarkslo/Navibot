@@ -1,5 +1,5 @@
-from ...jsonreader import JSONReader
-from ...entity import Entity
+from ..jsonreader import JSONReader
+from ..entity import Entity
 from datetime import datetime, timezone
 from math import floor
 
@@ -15,14 +15,14 @@ class Metar(Entity):
         flat_data = jsonReader.get_all_values(None,2)
         flat_data["report"] = flat_data.pop("0")
         super().__init__(flat_data)
-        self.datetime = self.decodeDateTime()
-        self.age = self.calculateReportAge()
-        self.icao = self.decodeICAO()
+        self.datetime = self.decode_datetime()
+        self.icao = self.decode_icao()
+        self.age = self.calculate_age()
 
-    def decodeICAO(self):
+    def decode_icao(self):
         return self.report.split()[0]
 
-    def decodeDateTime(self):
+    def decode_datetime(self):
         value = self.report.split()[1]
         day = int(value[:2]) 
         hour = int(value[2:4])  
@@ -34,7 +34,7 @@ class Metar(Entity):
         report_utc_datetime = datetime(today_date.year, today_date.month, day, hour, minute, tzinfo=timezone.utc)
         return report_utc_datetime
 
-    def calculateReportAge(self):
+    def calculate_age(self):
        curr_utc_datetime = datetime.now(timezone.utc)  
        return floor((curr_utc_datetime - self.datetime).total_seconds() / 60)
 
