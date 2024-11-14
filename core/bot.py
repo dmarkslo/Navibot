@@ -4,6 +4,7 @@ from .commandHandler import *
 from .commands.command import Command
 from .commands.utility.cmds_command import CmdsCommand
 from .commands.utility.info_command import InfoCommand
+from .commands.utility.atc_command import AtcCommand
 from .commands.weather.metar_command import MetarCommand
 import discord
 
@@ -16,6 +17,7 @@ class Bot(commands.AutoShardedBot):
     handler = CommandHandler()
     handler.register_command(MetarCommand())
     handler.register_command(InfoCommand())
+    handler.register_command(AtcCommand())
     handler.register_command(CmdsCommand(handler.commands))
 
     def __init__(self):
