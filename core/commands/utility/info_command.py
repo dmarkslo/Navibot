@@ -47,6 +47,7 @@ class InfoCommand(Command):
             colour=0x00b0f4,
             timestamp=datetime.now()
         )
+        embed.set_footer(text="Data provided by CheckWX", icon_url="")
         
         embed.add_field(name="ICAO", value=station.icao or "N/A", inline=True)
         embed.add_field(name="IATA", value=station.iata or "N/A", inline=True)
@@ -59,6 +60,5 @@ class InfoCommand(Command):
         embed.add_field(name="Status", value=f"{station.status}" or "N/A", inline=True)
 
         embed.set_thumbnail(url="https://dmark.dev/public_assets/operational.jpg" if station.status == "Operational" else "https://dmark.dev/public_assets/uknown.jpg")
-        embed.set_footer(text="Data provided by CheckWX", icon_url="")
 
         return embed

@@ -1,6 +1,9 @@
 from .commands.command import Command
 
 class CommandHandler:
+    """CommandHandler class registers and keeps track of
+        all commands, enabled and disabled
+        and manages their execution."""
     def __init__(self):
         self.commands = {}
 

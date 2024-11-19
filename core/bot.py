@@ -22,7 +22,7 @@ class Bot(commands.AutoShardedBot):
 
     def __init__(self):
         super().__init__(
-            command_prefix = "?",
+            command_prefix = "$",
             intents=discord.Intents.all(),
             chunk_build_at_startup=False
         )
@@ -35,7 +35,7 @@ class Bot(commands.AutoShardedBot):
         if message.author == self.user:
             return
         
-        if message.content.startswith('$'):
+        if message.content.startswith(self.command_prefix):
             parts = message.content.split(maxsplit=1)
             command = parts[0][1:].lower()
             args = parts[1].split() if len(parts) > 1 else []

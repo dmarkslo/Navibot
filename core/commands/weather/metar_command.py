@@ -6,7 +6,11 @@ from config import APIKEY
 import requests
 import discord
 
-
+#WIP:
+#   - Send an embed of current METAR data to user
+#      (Add Playwright functionality to screenshot webpage and send as jpg)
+#       SOLVE: MAKE OWN WEBPAGE FROM EMBED WITH BUILT IN SCRIPT TO IMPORT STYLING ETC,
+#       or screenshot an area from the main webpage
 class MetarCommand(Command):
 
     def __init__(self):

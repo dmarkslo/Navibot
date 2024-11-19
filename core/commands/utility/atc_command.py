@@ -8,6 +8,9 @@ import pandas as pd
 
 
 #COMMAND IS STILL NOT FINISHED, WIP
+#IDEAS:
+#    -> Add estimated log-off time for ATC station. 
+#        (Calculate each controller's average previous session length and sub from curr session).
 
 class AtcCommand(Command):
 
@@ -58,14 +61,12 @@ class AtcCommand(Command):
             timestamp=datetime.now()
         )
 
-        
+        embed.set_footer(text="Data provided by VATSIM", icon_url="https://vatsim.dev/img/logo.png")
         
         if data:
-            embed.add_field(name=f"ATC online at {icao}", value=f"", inline=False)
+            embed.add_field(name=f"ATC online at {icao} ({len(data.keys())})", value=f"", inline=False)
             for key in data:
                 embed.add_field(name=f"`{key}`", value=f"online for {self.atc_time_online(data[key])} min." or "N/A", inline=False)
          
-        embed.set_footer(text="Data provided by VATSIM", icon_url="https://vatsim.dev/img/logo.png")
-
         return embed
     
